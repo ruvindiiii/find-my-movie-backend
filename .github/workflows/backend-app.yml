@@ -14,7 +14,7 @@ jobs:
         run: |
           echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > private_key.pem
           chmod 600 private_key.pem
-          
+
           ssh -i private_key.pem -o StrictHostKeyChecking=no ubuntu@35.180.209.175 << 'EOF'
             # Define variables directly on the EC2 instance
             REPO_URL="git@github.com:ruvindiiii/find-my-movie-backend.git"
@@ -25,6 +25,9 @@ jobs:
             export DATABASE_USER=ruvi
             export DATABASE_PASSWORD=ruvi
             export DATABASE_NAME=movies
+
+            mkdir -p ~/.ssh
+            ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 
             # Clone or update the repo
             if [ -d "$APP_DIR" ]; then
