@@ -1,10 +1,12 @@
 const express = require("express");
 const { query } = require("./db.js");
+const cors = require("cors");
 
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 const app = express();
 const port = 3000;
 app.use(bodyParser());
+app.use(cors());
 
 app.get("/", async (req, res) => {
   let result = await query("SELECT * from users");
