@@ -9,7 +9,7 @@ app.use(bodyParser());
 app.use(cors());
 
 app.get("/", async (req, res) => {
-  return res.status(401);
+  return res.status(401).json({ status: "Restricted" });
   let result = await query("SELECT * from users");
   res.json(result.rows);
 });
