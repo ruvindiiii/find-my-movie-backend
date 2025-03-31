@@ -9,6 +9,7 @@ app.use(bodyParser());
 app.use(cors());
 
 app.get("/", async (req, res) => {
+  return res.status(401);
   let result = await query("SELECT * from users");
   res.json(result.rows);
 });
